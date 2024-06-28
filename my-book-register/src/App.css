@@ -7,6 +7,12 @@
   background-color: antiquewhite;
 }
 
+/* 第四問 ボタンホバー時に押せそうな見た目になるよう変更 */
+.button:hover{
+  opacity: 0.8;
+  cursor: pointer;
+}
+
 .label {
   font-weight: bold;
 }

@@ -8,11 +8,7 @@ interface Props {
   onClickLendingSwitch: (id: string) => void;
 }
 
-const BookTable = ({
-  bookItems,
-  onClickDelete,
-  onClickLendingSwitch,
-}: Props) => {
+const BookTable = ({ bookItems, onClickDelete, onClickLendingSwitch }: Props) => {
   return (
     <table border={1}>
       <thead>
@@ -22,15 +18,19 @@ const BookTable = ({
           <td>操作</td>
         </tr>
       </thead>
-      {bookItems.map((book) => (
-        <BookRow
-          bookItem={book}
-          onClickDelete={onClickDelete}
-          onClickLendingSwitch={onClickLendingSwitch}
-          key={book.id}
-        />
-      ))}
+      {/* 第四問 tabele直下にtrがあってtbodyがない警告が出ないように修正 */}
+      <tbody>
+        {bookItems.map((book) => (
+          <BookRow
+            bookItem={book}
+            onClickDelete={onClickDelete}
+            onClickLendingSwitch={onClickLendingSwitch}
+            key={book.id}
+          />
+        ))}
+      </tbody>
     </table>
   );
 };
 export default BookTable;
+

@@ -12,6 +12,8 @@ function App() {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`)
       .then((response) => response.json())
       .then((data) => {
+        // 第四問 登録ボタンを押して送信したら入力欄をクリアする
+        setIsbn('');
         if (data.totalItems === 0) {
           alert('登録されていない ISBN コードです。');
           return;
