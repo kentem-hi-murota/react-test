@@ -13,6 +13,7 @@
 
 .input {
   height: 25px;
+  margin: 0 16px;
 }
 
 .label-input {
@@ -25,4 +26,11 @@
 
 .filterable-book-table {
   display: flex;
+  flex-wrap: wrap;
+}
+
+table{
+  width: 100%;
+  text-align: center;
+  margin-top: 16px;
 }
