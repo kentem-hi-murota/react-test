@@ -12,7 +12,10 @@ interface Props {
 const FilterableBookTable = ({ books, onClickDelete, onClickLendingSwitch }: Props) => {
   const [filterText, setFilterText] = useState('');
 
+  const [isDisplayOnlyAvailable, setIsDisplayOnlyAvailable] = useState(false);
+
   const handleChangeFilterText: ChangeEventHandler<HTMLInputElement> = (e) => setFilterText(e.target.value);
+  const handleChangeIsCheck: ChangeEventHandler<HTMLInputElement> = (e) => setIsDisplayOnlyAvailable(e.target.checked);
 
   return (
     <div className="filterable-book-table">
@@ -26,8 +29,23 @@ const FilterableBookTable = ({ books, onClickDelete, onClickLendingSwitch }: Pro
         handleOnChange={handleChangeFilterText}
       />
 
+      <LabelInput
+        className="label-input"
+        labelClassName="label"
+        labelValue="利用可能のみ表示"
+        inputValue=""
+        inputType="checkbox"
+        inputPlaceHolder=""
+        inputClassName=""
+        handleOnChange={handleChangeIsCheck}
+      />
+
       <BookTable
-        bookItems={books.filter((x) => !filterText || x.name.includes(filterText))}
+        bookItems={books.filter((x) => {
+          const availableFilter = isDisplayOnlyAvailable ? !x.isOnLoan : true;
+          const nameFilter = !filterText || x.name.includes(filterText);
+          return availableFilter && nameFilter;
+        })}
         onClickDelete={onClickDelete}
         onClickLendingSwitch={onClickLendingSwitch}
       />

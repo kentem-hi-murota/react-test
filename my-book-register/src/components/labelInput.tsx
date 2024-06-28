@@ -5,6 +5,7 @@ interface Props {
   labelClassName: string;
   labelValue: string;
   inputValue: string;
+  inputType?: string;
   inputPlaceHolder: string;
   inputClassName: string;
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -15,19 +16,22 @@ const LabelInput = ({
   labelClassName,
   labelValue,
   inputValue,
+  inputType = 'text',
   inputPlaceHolder,
   inputClassName,
   handleOnChange,
 }: Props) => {
   return (
     <div className={className}>
-      <label className={labelClassName}>{labelValue}</label>
+      {inputType === 'text' && <label className={labelClassName}>{labelValue}</label>}
       <Input
         value={inputValue}
+        type={inputType}
         placeHolder={inputPlaceHolder}
         className={inputClassName}
         handleOnChange={handleOnChange}
       />
+      {inputType !== 'text' && <label className={labelClassName}>{labelValue}</label>}
     </div>
   );
 };
