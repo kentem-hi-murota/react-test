@@ -26,3 +26,4 @@ const BookRow = ({ bookItem, onClickDelete, onClickLendingSwitch }: Props) => {
   );
 };
 export default BookRow;
+
