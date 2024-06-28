@@ -9,11 +9,14 @@ function App() {
   const [books, setBooks] = useState<BookItemModel[]>([]);
 
   const handleClickButton = (): void => {
+    if (books.some((book) => book.id === isbn)) {
+      alert('登録済みの ISBNコードです。');
+      return;
+    }
     fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`)
       .then((response) => response.json())
       .then((data) => {
         // 第四問 登録ボタンを押して送信したら入力欄をクリアする
-        setIsbn('');
         if (data.totalItems === 0) {
           alert('登録されていない ISBN コードです。');
           return;
@@ -22,6 +25,7 @@ function App() {
           name: data.items[0].volumeInfo.title,
           isOnLoan: false,
         });
+        setIsbn('');
       });
   };
 
@@ -29,7 +33,7 @@ function App() {
     setBooks((prev) => [
       ...prev,
       {
-        id: prev.length.toString(),
+        id: isbn,
         ...postedItem,
       },
     ]);
