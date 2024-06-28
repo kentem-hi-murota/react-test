@@ -44,11 +44,21 @@ function App() {
         onClickDelete={(id) => {
           {
             /* 第2問：貸出 or 返却 or 削除の処理を追加 */
+            setBooks(books.filter((book) => book.id !== id));
           }
         }}
         onClickLendingSwitch={(id) => {
           {
             /* 第2問：貸出 or 返却 or 削除の処理を追加 */
+            setBooks(
+              books.map((book) => {
+                if (book.id === id) {
+                  return { ...book, isOnLoan: !book.isOnLoan };
+                } else {
+                  return book;
+                }
+              }),
+            );
           }
         }}
       />
